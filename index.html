@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
     <title>GameZone - Tu Tienda de Videojuegos</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -19,6 +19,274 @@
         }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /*.pixelated {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}*/
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(120deg); }
+    66% { transform: translateY(5px) rotate(240deg); }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes controller-fall {
+    0% { 
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% { 
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes controller-fall-reverse {
+    0% { 
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% { 
+        transform: translateY(-100vh) rotate(-360deg);
+        opacity: 0;
+    }
+}
+
+.controller {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    opacity: 0.7;
+}
+
+.controller-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* PlayStation Controller */
+.ps-controller {
+    position: relative;
+    width: 60px;
+    height: 35px;
+    background: linear-gradient(145deg, #2c3e50, #34495e);
+    border-radius: 15px 15px 8px 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.ps-controller::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 8px;
+    background: linear-gradient(145deg, #1a252f, #2c3e50);
+    border-radius: 4px 4px 0 0;
+}
+
+.ps-dpad {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    width: 12px;
+    height: 12px;
+}
+
+.ps-dpad::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 12px;
+    height: 4px;
+    background: #34495e;
+    border-radius: 2px;
+}
+
+.ps-dpad::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 4px;
+    width: 4px;
+    height: 12px;
+    background: #34495e;
+    border-radius: 2px;
+}
+
+.ps-buttons {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 12px;
+    height: 12px;
+}
+
+.ps-button {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+}
+
+.ps-button:nth-child(1) { top: 0; left: 4px; background: #e74c3c; }
+.ps-button:nth-child(2) { top: 4px; right: 0; background: #3498db; }
+.ps-button:nth-child(3) { bottom: 0; left: 4px; background: #f39c12; }
+.ps-button:nth-child(4) { top: 4px; left: 0; background: #27ae60; }
+
+/* Xbox Controller */
+.xbox-controller {
+    position: relative;
+    width: 60px;
+    height: 38px;
+    background: linear-gradient(145deg, #2d3748, #4a5568);
+    border-radius: 20px 20px 10px 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.xbox-controller::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 6px;
+    background: linear-gradient(145deg, #1a202c, #2d3748);
+    border-radius: 3px 3px 0 0;
+}
+
+.xbox-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #68d391;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(104, 211, 145, 0.6);
+}
+
+.xbox-triggers {
+    position: absolute;
+    top: -8px;
+    width: 8px;
+    height: 6px;
+    background: linear-gradient(145deg, #4a5568, #2d3748);
+    border-radius: 4px 4px 0 0;
+}
+
+.xbox-triggers:first-child { left: 8px; }
+.xbox-triggers:last-child { right: 8px; }
+
+/* Nintendo Controller */
+.nintendo-controller {
+    position: relative;
+    width: 55px;
+    height: 32px;
+    background: linear-gradient(145deg, #dc2626, #ef4444);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
+}
+
+.nintendo-screen {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 12px;
+    background: linear-gradient(145deg, #1f2937, #374151);
+    border-radius: 2px;
+    border: 1px solid #4b5563;
+}
+
+.nintendo-controls {
+    position: absolute;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+}
+
+.nintendo-controls:first-child { left: 4px; }
+.nintendo-controls:last-child { right: 4px; }
+
+.nintendo-controls::before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 2px;
+    background: #374151;
+    border-radius: 1px;
+    top: 3px;
+}
+
+.nintendo-controls::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 6px;
+    background: #374151;
+    border-radius: 1px;
+    left: 3px;
+    top: 1px;
+}
+
+/* Generic Controller */
+.generic-controller {
+    position: relative;
+    width: 58px;
+    height: 36px;
+    background: linear-gradient(145deg, #6b46c1, #8b5cf6);
+    border-radius: 18px 18px 8px 8px;
+    box-shadow: 0 4px 8px rgba(107, 70, 193, 0.3);
+}
+
+.generic-sticks {
+    position: absolute;
+    bottom: 8px;
+    width: 6px;
+    height: 6px;
+    background: #4c1d95;
+    border-radius: 50%;
+    border: 1px solid #7c3aed;
+}
+
+.generic-sticks:first-child { left: 12px; }
+.generic-sticks:last-child { right: 12px; }
+
+.controller-fall {
+    animation: controller-fall 10s linear infinite;
+}
+
+.controller-fall-reverse {
+    animation: controller-fall-reverse 12s linear infinite;
+}
+
+    </style>
 </head>
 <body class="bg-white text-gray-900">
     <!-- Navigation -->
@@ -33,36 +301,169 @@
                         <a href="#inicio" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Inicio</a>
                         <a href="#servicios" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Servicios</a>
                         <a href="#nosotros" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Nosotros</a>
+                        <a href="#testimonios" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Testimonios</a>
                         <a href="#contacto" class="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium transition-colors">Contacto</a>
                     </div>
                 </div>
                 <div class="md:hidden">
-                    <button class="text-gray-700 hover:text-primary">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-primary focus:outline-none focus:text-primary">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
+                </div>
+            </div>
+        
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+                    <a href="#inicio" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors">Inicio</a>
+                    <a href="#servicios" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors">Servicios</a>
+                    <a href="#nosotros" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors">Nosotros</a>
+                    <a href="#testimonios" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors">Testimonios</a>
+                    <a href="#contacto" class="text-gray-700 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors">Contacto</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="inicio" class="pt-16 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                    El Universo <span class="text-primary">Gaming</span><br>
-                    a Tu Alcance
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                    Descubre la mejor selección de videojuegos, consolas y accesorios. 
-                    Reparamos tu consola y te ofrecemos los mejores precios del mercado.
-                </p>
-                <button class="bg-primary hover:bg-primary-dark text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    Conoce más
-                </button>
+    <section id="inicio" class="pt-16 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white relative overflow-hidden">
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-10 left-10 w-16 h-16 bg-yellow-400 rounded-full animate-bounce"></div>
+        <div class="absolute top-32 right-20 w-8 h-8 bg-green-400 rounded-full animate-pulse"></div>
+        <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-red-400 rounded-full animate-bounce" style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 right-10 w-6 h-6 bg-blue-400 rounded-full animate-pulse" style="animation-delay: 2s;"></div>
+    </div>
+    
+    <!-- Vertical Controllers -->
+    <div class="absolute inset-0 pointer-events-none">
+        <!-- PlayStation Controller 1 -->
+        <div class="controller controller-fall" style="left: 8%; animation-delay: 0s;">
+            <div class="ps-controller">
+                <div class="ps-dpad"></div>
+                <div class="ps-buttons">
+                    <div class="ps-button"></div>
+                    <div class="ps-button"></div>
+                    <div class="ps-button"></div>
+                    <div class="ps-button"></div>
+                </div>
             </div>
         </div>
-    </section>
+        
+        <!-- Xbox Controller 1 -->
+        <div class="controller controller-fall-reverse" style="left: 20%; animation-delay: 2s;">
+            <div class="xbox-controller">
+                <div class="xbox-logo"></div>
+                <div class="xbox-triggers"></div>
+                <div class="xbox-triggers"></div>
+            </div>
+        </div>
+        
+        <!-- Nintendo Controller 1 -->
+        <div class="controller controller-fall" style="left: 32%; animation-delay: 4s;">
+            <div class="nintendo-controller">
+                <div class="nintendo-screen"></div>
+                <div class="nintendo-controls"></div>
+                <div class="nintendo-controls"></div>
+            </div>
+        </div>
+        
+        <!-- Generic Controller 1 -->
+        <div class="controller controller-fall-reverse" style="left: 44%; animation-delay: 1s;">
+            <div class="generic-controller">
+                <div class="generic-sticks"></div>
+                <div class="generic-sticks"></div>
+            </div>
+        </div>
+        
+        <!-- PlayStation Controller 2 -->
+        <div class="controller controller-fall" style="left: 56%; animation-delay: 6s;">
+            <div class="ps-controller">
+                <div class="ps-dpad"></div>
+                <div class="ps-buttons">
+                    <div class="ps-button"></div>
+                    <div class="ps-button"></div>
+                    <div class="ps-button"></div>
+                    <div class="ps-button"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Xbox Controller 2 -->
+        <div class="controller controller-fall-reverse" style="left: 68%; animation-delay: 3s;">
+            <div class="xbox-controller">
+                <div class="xbox-logo"></div>
+                <div class="xbox-triggers"></div>
+                <div class="xbox-triggers"></div>
+            </div>
+        </div>
+        
+        <!-- Nintendo Controller 2 -->
+        <div class="controller controller-fall" style="left: 80%; animation-delay: 5s;">
+            <div class="nintendo-controller">
+                <div class="nintendo-screen"></div>
+                <div class="nintendo-controls"></div>
+                <div class="nintendo-controls"></div>
+            </div>
+        </div>
+        
+        <!-- Generic Controller 2 -->
+        <div class="controller controller-fall-reverse" style="left: 92%; animation-delay: 7s;">
+            <div class="generic-controller">
+                <div class="generic-sticks"></div>
+                <div class="generic-sticks"></div>
+            </div>
+        </div>
+        
+        <!-- Additional smaller controllers for variety -->
+        <div class="controller controller-fall" style="left: 14%; animation-delay: 8s; transform: scale(0.7);">
+            <div class="ps-controller">
+                <div class="ps-dpad"></div>
+                <div class="ps-buttons">
+                    <div class="ps-button"></div>
+                    <div class="ps-button"></div>
+                    <div class="ps-button"></div>
+                    <div class="ps-button"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controller controller-fall-reverse" style="left: 74%; animation-delay: 9s; transform: scale(0.8);">
+            <div class="xbox-controller">
+                <div class="xbox-logo"></div>
+                <div class="xbox-triggers"></div>
+                <div class="xbox-triggers"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10">
+        <div class="text-center">
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                El Universo <span class="text-primary">Gaming</span><br>
+                a Tu Alcance
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                Descubre la mejor selección de videojuegos, consolas y accesorios. 
+                Reparamos tu consola y te ofrecemos los mejores precios del mercado.
+            </p>
+            <button class="bg-primary hover:bg-primary-dark text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg animate-bounce">
+                <a href="tel:+1234567890">
+                Conoce más
+                </a>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Floating particles -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute w-2 h-2 bg-white rounded-full opacity-60 animate-float" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="absolute w-1 h-1 bg-white rounded-full opacity-40 animate-float" style="top: 60%; left: 20%; animation-delay: 2s;"></div>
+        <div class="absolute w-3 h-3 bg-white rounded-full opacity-30 animate-float" style="top: 40%; left: 80%; animation-delay: 4s;"></div>
+        <div class="absolute w-2 h-2 bg-white rounded-full opacity-50 animate-float" style="top: 80%; left: 70%; animation-delay: 1s;"></div>
+        <div class="absolute w-1 h-1 bg-white rounded-full opacity-60 animate-float" style="top: 30%; left: 90%; animation-delay: 3s;"></div>
+    </div>
+</section>
 
     <!-- Carousel Section -->
     <section class="py-16 bg-gray-50">
@@ -409,7 +810,7 @@
             <div class="text-center mt-12">
                 <p class="text-lg text-gray-600 mb-6">¿Quieres ser parte de nuestros clientes satisfechos?</p>
                 <button class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    Visítanos Hoy
+                    <a href="https://maps.app.goo.gl/K966SSkP15DhXL8V8">Visítanos Hoy</a>
                 </button>
             </div>
         </div>
@@ -444,7 +845,7 @@
                             </div>
                             <div>
                                 <h4 class="font-semibold text-gray-900">Teléfono</h4>
-                                <p class="text-gray-600">+1 (555) 123-4567</p>
+                                <p class="text-gray-600">+1 (123) 456-7890</p>
                             </div>
                         </div>
                         
@@ -469,6 +870,7 @@
                             </div>
                         </div>
                     </div>
+                
                 </div>
                 
                 <!-- Contact Form -->
@@ -545,8 +947,8 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Contacto</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li>Calle Gaming 123</li>
-                        <li>+1 (555) 123-4567</li>
+                        <li>Calle Gaming 123, Centro Comercial Tech Plaza</li>
+                        <li>+1 (234) 456-7890</li>
                         <li>info@gamezone.com</li>
                         <li>Lun - Sáb: 10AM - 8PM</li>
                     </ul>
@@ -554,12 +956,13 @@
             </div>
             
             <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-                <p class="text-gray-400">&copy; 2024 GameZone. Todos los derechos reservados.</p>
+                <p class="text-gray-400">&copy; 2025 GameZone. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Carousel functionality
         let currentSlide = 0;
         const totalSlides = 4;
         
@@ -598,6 +1001,45 @@
         // Auto-play carousel
         setInterval(nextSlide, 5000);
         
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = mobileMenuButton.querySelector('i');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                
+                // Toggle icon between hamburger and X
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                } else {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+        });
+        
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -609,6 +1051,19 @@
                         block: 'start'
                     });
                 }
+            });
+        });
+        
+        // Add parallax effect to hero section controllers
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.getElementById('inicio');
+            const controllers = heroSection.querySelectorAll('.controller');
+            
+            controllers.forEach((controller, index) => {
+                const speed = 0.05 + (index * 0.01);
+                const currentTransform = controller.style.transform || '';
+                controller.style.transform = currentTransform + ` translateY(${scrolled * speed}px)`;
             });
         });
     </script>
